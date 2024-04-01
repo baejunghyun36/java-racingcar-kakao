@@ -7,7 +7,7 @@ public class Car {
     private int position;
     private String name;
 
-    public Car(){
+    private Car() {
         checkCarNameLength(EMPTY_NAME);
     }
 
