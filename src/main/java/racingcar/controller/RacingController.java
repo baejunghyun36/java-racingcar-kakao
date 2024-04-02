@@ -2,7 +2,8 @@ package racingcar.controller;
 
 import racingcar.model.RacingGame;
 import racingcar.view.InputValidator;
-import racingcar.view.View;
+import racingcar.view.InputView;
+import racingcar.view.OutputView;
 
 public class RacingController {
     private RacingGame racingGame;
@@ -15,22 +16,22 @@ public class RacingController {
     public void run() {
         gameSetting();
         gameStart();
-        View.displayWinners(racingGame.selectWinners());
     }
 
     public void gameSetting(){
-        String carNames = View.displayInputCarName();
+        String carNames = InputView.readCarName();
         String[] names = inputValidator.createCarsFromUserInput(carNames);
-        int round = View.displayTryCount();
+        int round = InputView.readTryCount();
         racingGame = new RacingGame(names, round);
     }
 
     private void gameStart(){
-        View.displayResult();
+        OutputView.displayResult();
         int round = racingGame.getRound();
         while (round-- > 0) {
             racingGame.move();
-            View.displayMoveResult(racingGame.getCars());
+            OutputView.displayMoveResult(racingGame.extractCarInfos());
         }
+        OutputView.displayWinners(racingGame.selectWinners());
     }
 }
