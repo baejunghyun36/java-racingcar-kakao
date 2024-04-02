@@ -1,5 +1,6 @@
 package racingcar.model;
 
+import dto.CarResponse;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -54,5 +55,11 @@ public class RacingGame {
                 .mapToInt(Car::getPosition)
                 .max()
                 .orElseThrow(()-> new IllegalStateException("있을 수 없는 상황이다."));
+    }
+
+    public List<CarResponse> extractCarInfos() {
+        return cars.stream()
+                .map(CarResponse::new)
+                .collect(Collectors.toList());
     }
 }
